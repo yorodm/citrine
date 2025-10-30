@@ -24,14 +24,13 @@ pub enum TokenKind {
     // Reader macros
     Quote,        // '
     Backtick,     // `
-    Tilde,        // ~
-    TildeAt,      // ~@
     Caret,        // ^
     Hash,         // #
     HashLeftBrace, // #{
     
     // Operators
     Comma,        // ,
+    CommaAt,      // ,@
     
     // Whitespace and comments
     Whitespace,   // space, tab, newline
@@ -58,12 +57,11 @@ impl fmt::Display for TokenKind {
             TokenKind::Keyword => write!(f, "keyword"),
             TokenKind::Quote => write!(f, "'"),
             TokenKind::Backtick => write!(f, "`"),
-            TokenKind::Tilde => write!(f, "~"),
-            TokenKind::TildeAt => write!(f, "~@"),
             TokenKind::Caret => write!(f, "^"),
             TokenKind::Hash => write!(f, "#"),
             TokenKind::HashLeftBrace => write!(f, "#{{"),
             TokenKind::Comma => write!(f, ","),
+            TokenKind::CommaAt => write!(f, ",@"),
             TokenKind::Whitespace => write!(f, "whitespace"),
             TokenKind::Comment => write!(f, "comment"),
             TokenKind::Error => write!(f, "error"),
@@ -112,4 +110,3 @@ impl fmt::Display for Token {
         write!(f, "{:?}@{}..{} '{}'", self.kind, self.start, self.end, self.text)
     }
 }
-
