@@ -72,8 +72,8 @@ impl Parser {
                     TokenKind::HashLeftBrace => self.parse_set(),
                     TokenKind::Quote => self.parse_quote(),
                     TokenKind::Backtick => self.parse_backtick(),
-                    TokenKind::Tilde => self.parse_unquote(),
-                    TokenKind::TildeAt => self.parse_unquote_splicing(),
+                    TokenKind::Comma => self.parse_unquote(),
+                    TokenKind::CommaAt => self.parse_unquote_splicing(),
                     TokenKind::Caret => self.parse_meta(),
                     TokenKind::Hash => {
                         // Check if it's a discard
@@ -297,9 +297,9 @@ impl Parser {
 
     /// Parses an unquote
     fn parse_unquote(&mut self) -> Result<(), ParserError> {
-        self.builder.start_node(CitrineLanguage::kind_to_raw(SyntaxKind::Unquote));
+        self.builder.start_node(CitrineLanguage::kind_to_raw(SyntaxKind::Comma));
         
-        // Consume the tilde
+        // Consume the comma
         self.consume_token();
         
         // Parse the unquoted form
@@ -311,9 +311,9 @@ impl Parser {
 
     /// Parses an unquote-splicing
     fn parse_unquote_splicing(&mut self) -> Result<(), ParserError> {
-        self.builder.start_node(CitrineLanguage::kind_to_raw(SyntaxKind::UnquoteSplicing));
+        self.builder.start_node(CitrineLanguage::kind_to_raw(SyntaxKind::CommaAt));
         
-        // Consume the tilde-at
+        // Consume the comma-at
         self.consume_token();
         
         // Parse the unquote-spliced form
@@ -579,7 +579,7 @@ mod tests {
     #[test]
     fn test_parse_backtick() {
         check(
-            "`(1 2 ~x)",
+            "`(1 2 ,x)",
             expect![[r#"
                 Root@0..7
                   Backtick@0..7
@@ -590,8 +590,8 @@ mod tests {
                         Number@2..3 "1"
                       NumberLit@3..4
                         Number@3..4 "2"
-                      Unquote@4..6
-                        TildeToken@4..5 "~"
+                      Comma@4..6
+                        CommaToken@4..5 ","
                         SymbolLit@5..6
                           Symbol@5..6 "x"
                       RightParen@6..7 ")"

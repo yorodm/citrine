@@ -462,16 +462,15 @@ mod tests {
 
     #[test]
     fn test_lexer_reader_macros() {
-        let input = "'`~^#,~@";
+        let input = "'`^#,,@";
         let mut lexer = Lexer::new(input);
         
         assert_eq!(lexer.next_token().kind, TokenKind::Quote);
         assert_eq!(lexer.next_token().kind, TokenKind::Backtick);
-        assert_eq!(lexer.next_token().kind, TokenKind::Tilde);
         assert_eq!(lexer.next_token().kind, TokenKind::Caret);
         assert_eq!(lexer.next_token().kind, TokenKind::Hash);
         assert_eq!(lexer.next_token().kind, TokenKind::Comma);
-        assert_eq!(lexer.next_token().kind, TokenKind::TildeAt);
+        assert_eq!(lexer.next_token().kind, TokenKind::CommaAt);
         assert_eq!(lexer.next_token().kind, TokenKind::Eof);
     }
 
