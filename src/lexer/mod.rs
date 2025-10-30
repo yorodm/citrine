@@ -59,19 +59,11 @@ impl<'a> Lexer<'a> {
                 '\'' => TokenKind::Quote,
                 '`' => TokenKind::Backtick,
                 ',' => {
-                    if self.peek() == Some('@') && self.at_start_of_list() {
-                        self.bump(); // consume '@'
-                        TokenKind::TildeAt
-                    } else {
-                        TokenKind::Comma
-                    }
-                }
-                '~' => {
                     if self.peek() == Some('@') {
                         self.bump(); // consume '@'
-                        TokenKind::TildeAt
+                        TokenKind::CommaAt
                     } else {
-                        TokenKind::Tilde
+                        TokenKind::Comma
                     }
                 }
                 '^' => TokenKind::Caret,
@@ -152,13 +144,6 @@ impl<'a> Lexer<'a> {
         }
     }
 
-    /// Checks if we're at the start of a list (after a comma)
-    fn at_start_of_list(&self) -> bool {
-        // This is a simplification - in a real implementation, we'd need to track
-        // the current nesting level and check if we're at the start of a list
-        // For now, we'll just assume we're at the start of a list if we're after a comma
-        true
-    }
 
     /// Lexes a comment
     fn lex_comment(&mut self) -> TokenKind {

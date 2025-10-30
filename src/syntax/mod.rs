@@ -28,9 +28,8 @@ pub enum SyntaxKind {
     // Reader macros
     Quote,
     Backtick,
-    Unquote,
-    UnquoteSplicing,
-    Deref,
+    Comma,
+    CommaAt,
     Meta,
     Tag,
     Discard,
@@ -56,13 +55,12 @@ pub enum SyntaxKind {
     
     QuoteToken,
     BacktickToken,
-    TildeToken,
-    TildeAtToken,
     CaretToken,
     HashToken,
     HashLeftBraceToken,
     
     CommaToken,
+    CommaAtToken,
     
     CommentToken,
     WhitespaceToken,
@@ -87,12 +85,11 @@ impl SyntaxKind {
             SyntaxKind::Keyword |
             SyntaxKind::QuoteToken |
             SyntaxKind::BacktickToken |
-            SyntaxKind::TildeToken |
-            SyntaxKind::TildeAtToken |
             SyntaxKind::CaretToken |
             SyntaxKind::HashToken |
             SyntaxKind::HashLeftBraceToken |
             SyntaxKind::CommaToken |
+            SyntaxKind::CommaAtToken |
             SyntaxKind::CommentToken |
             SyntaxKind::WhitespaceToken |
             SyntaxKind::ErrorToken |
@@ -122,9 +119,8 @@ impl fmt::Display for SyntaxKind {
             SyntaxKind::SymbolLit => "SymbolLit",
             SyntaxKind::Quote => "Quote",
             SyntaxKind::Backtick => "Backtick",
-            SyntaxKind::Unquote => "Unquote",
-            SyntaxKind::UnquoteSplicing => "UnquoteSplicing",
-            SyntaxKind::Deref => "Deref",
+            SyntaxKind::Comma => "Comma",
+            SyntaxKind::CommaAt => "CommaAt",
             SyntaxKind::Meta => "Meta",
             SyntaxKind::Tag => "Tag",
             SyntaxKind::Discard => "Discard",
@@ -144,12 +140,11 @@ impl fmt::Display for SyntaxKind {
             SyntaxKind::Keyword => "Keyword",
             SyntaxKind::QuoteToken => "QuoteToken",
             SyntaxKind::BacktickToken => "BacktickToken",
-            SyntaxKind::TildeToken => "TildeToken",
-            SyntaxKind::TildeAtToken => "TildeAtToken",
             SyntaxKind::CaretToken => "CaretToken",
             SyntaxKind::HashToken => "HashToken",
             SyntaxKind::HashLeftBraceToken => "HashLeftBraceToken",
             SyntaxKind::CommaToken => "CommaToken",
+            SyntaxKind::CommaAtToken => "CommaAtToken",
             SyntaxKind::CommentToken => "CommentToken",
             SyntaxKind::WhitespaceToken => "WhitespaceToken",
             SyntaxKind::ErrorToken => "ErrorToken",
@@ -197,12 +192,11 @@ pub fn token_to_syntax_kind(kind: crate::lexer::TokenKind) -> SyntaxKind {
         crate::lexer::TokenKind::Keyword => SyntaxKind::Keyword,
         crate::lexer::TokenKind::Quote => SyntaxKind::QuoteToken,
         crate::lexer::TokenKind::Backtick => SyntaxKind::BacktickToken,
-        crate::lexer::TokenKind::Tilde => SyntaxKind::TildeToken,
-        crate::lexer::TokenKind::TildeAt => SyntaxKind::TildeAtToken,
         crate::lexer::TokenKind::Caret => SyntaxKind::CaretToken,
         crate::lexer::TokenKind::Hash => SyntaxKind::HashToken,
         crate::lexer::TokenKind::HashLeftBrace => SyntaxKind::HashLeftBraceToken,
         crate::lexer::TokenKind::Comma => SyntaxKind::CommaToken,
+        crate::lexer::TokenKind::CommaAt => SyntaxKind::CommaAtToken,
         crate::lexer::TokenKind::Whitespace => SyntaxKind::WhitespaceToken,
         crate::lexer::TokenKind::Comment => SyntaxKind::CommentToken,
         crate::lexer::TokenKind::Error => SyntaxKind::ErrorToken,

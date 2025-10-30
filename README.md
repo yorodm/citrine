@@ -79,6 +79,46 @@ symbol := r#"[A-Za-z!?\-+<>=$*%_/][A-Za-z\d!?\-+<>=$*%_/]*"#;
 - Support for literals: strings, numbers, characters, keywords, symbols
 - Comprehensive test suite
 
+## Development Setup
+
+### Using Nix Flake (Recommended for NixOS users)
+
+This repository includes a Nix flake configuration for easy development environment setup:
+
+```bash
+# If you have direnv installed (recommended)
+direnv allow
+
+# Or directly using nix develop
+nix develop
+
+# Build the project
+cargo build
+
+# Run tests
+cargo test
+```
+
+The Nix flake provides:
+- Rust toolchain with rust-analyzer, clippy, and rustfmt
+- Development tools like cargo-watch, cargo-edit, etc.
+- Proper environment variables setup
+
+### Manual Setup
+
+If you're not using Nix:
+
+```bash
+# Install Rust using rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Build the project
+cargo build
+
+# Run tests
+cargo test
+```
+
 ## Usage
 
 ```rust
@@ -111,4 +151,3 @@ The codebase is organized into three main modules:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
