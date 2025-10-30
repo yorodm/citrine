@@ -1,0 +1,18 @@
+[package]
+name = "citrine"
+version = "0.1.0"
+edition = "2021"
+description = "A Clojure-like language implemented in Rust"
+authors = ["Citrine Team"]
+
+[dependencies]
+rowan = "0.15.15"
+smol_str = "0.2.1"
+thiserror = "1.0.56"
+
+[dev-dependencies]
+expect-test = "1.4.1"
+
+[[example]]
+name = "simple"
+path = "examples/simple.rs"
